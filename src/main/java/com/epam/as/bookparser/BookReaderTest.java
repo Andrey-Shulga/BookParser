@@ -1,45 +1,27 @@
 package com.epam.as.bookparser;
 
-import com.epam.as.bookparser.entity.Text;
-import com.epam.as.bookparser.model.TextComposite;
-import com.epam.as.bookparser.service.FileReader;
-import com.epam.as.bookparser.service.FileWriter;
+import com.epam.as.bookparser.Parser.TextParser;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 /**
- * This program parses book (from text file) into its separate parts.
+ * This program parse text on its parts.
  *
  * @author Andrey Shulga
- * @version 1.0.0 2016-10-24
+ * @version 1.0 2016-10-27
  */
 public class BookReaderTest {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws FileNotFoundException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
-        String inputBookFilename = "book.txt";
-        String copyBookFilename = "bookCopy.txt";
+        String bookFileName = "book.txt";
 
-        FileReader reader = new FileReader();
-        FileWriter writer = new FileWriter();
+        TextParser parser = new TextParser();
+        parser.configure();
 
-        //Read a text from the book
-        String fileText = reader.getTextFromFile(inputBookFilename);
+        InputStream in = new FileInputStream(bookFileName);
+        parser.parse(in);
 
-        //Parse the whole text from the book on separate parts
-        Text text = new Text(fileText);
-
-        //Collect recursively all parts back to text
-        String collectedText = text.getTextParts();
-
-        //Output collected text to console
-        System.out.println(collectedText);
-
-        //Write collected text to file
-        writer.writeToFile(collectedText, copyBookFilename);
-
-        //Add all container objects to list (don't work, need help)
-        List<TextComposite> allContainerList = new ArrayList<>(text.getTextContainer());
     }
 }
