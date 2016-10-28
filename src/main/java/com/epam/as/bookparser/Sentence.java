@@ -1,24 +1,13 @@
 package com.epam.as.bookparser;
 
 import java.util.Iterator;
-import java.util.List;
 
 /**
- * Container keeps the list of sentence parts (words, whitespaces, punctuations mark).
+ * Container keeps the list of sentence parts.
  */
-public class Sentence extends AbstractTextComposite<Word> {
+public class Sentence extends AbstractTextComposite<SentencePart> {
 
-    private List<Word> components;
 
-    @Override
-    public void add(Word component) {
-        components.add(component);
-    }
-
-    @Override
-    public List<Word> getComponents(Class clazz) {
-        return components;
-    }
 
     @Override
     public String toSourceString() {

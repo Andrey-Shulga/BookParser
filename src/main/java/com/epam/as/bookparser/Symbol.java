@@ -5,13 +5,12 @@ package com.epam.as.bookparser;
  */
 public class Symbol implements TextLeaf<TextComponent> {
 
-    public char ch;
+    private char ch;
 
-    public Symbol(String ch) {
-        this.ch = ch.charAt(0);
+    public Symbol(char ch) {
+        this.ch = ch;
     }
 
-    ;
 
     @Override
     public String toSourceString() {

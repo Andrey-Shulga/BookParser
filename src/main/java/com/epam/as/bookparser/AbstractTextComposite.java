@@ -1,13 +1,14 @@
 package com.epam.as.bookparser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Abstract class for text composite classes
  */
-public abstract class AbstractTextComposite<E extends TextComponent> implements TextComposite<E> {
+abstract class AbstractTextComposite<E extends TextComponent> implements TextComposite<E> {
 
-    private List<E> components;
+    private List<E> components = new ArrayList<>();
 
 
     @Override
@@ -16,8 +17,6 @@ public abstract class AbstractTextComposite<E extends TextComponent> implements 
 
     }
 
-    @Override
-    public List<E> getComponents(Class clazz) {
-        return components;
-    }
+
+    public abstract String toSourceString();
 }

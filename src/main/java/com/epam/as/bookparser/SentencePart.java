@@ -3,10 +3,9 @@ package com.epam.as.bookparser;
 import java.util.Iterator;
 
 /**
- * Keeps word
+ * Container keeps the list of words, whitespaces, punctuations mark.
  */
-public class Word extends AbstractTextComposite<Symbol> {
-
+public class SentencePart extends AbstractTextComposite<Word> {
 
     @Override
     public String toSourceString() {
