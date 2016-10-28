@@ -1,4 +1,4 @@
-package com.epam.as.bookparser;
+package com.epam.as.bookparser.model;
 
 import java.util.Iterator;
 
@@ -6,12 +6,6 @@ import java.util.Iterator;
  * Keeps word
  */
 public class Word extends AbstractTextComposite<Symbol> {
-
-
-    @Override
-    public String toSourceString() {
-        return null;
-    }
 
     @Override
     public Iterator<TextComponent> iterator() {

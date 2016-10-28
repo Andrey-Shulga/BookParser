@@ -1,4 +1,4 @@
-package com.epam.as.bookparser;
+package com.epam.as.bookparser.model;
 
 import java.util.Iterator;
 
@@ -6,13 +6,6 @@ import java.util.Iterator;
  * Container keeps the list of sentence parts.
  */
 public class Sentence extends AbstractTextComposite<SentencePart> {
-
-
-
-    @Override
-    public String toSourceString() {
-        return null;
-    }
 
 
     @Override

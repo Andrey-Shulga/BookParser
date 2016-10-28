@@ -1,4 +1,4 @@
-package com.epam.as.bookparser;
+package com.epam.as.bookparser.model;
 
 /**
  * An interface for access to composite objects.

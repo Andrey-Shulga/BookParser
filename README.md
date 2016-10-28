@@ -1,4 +1,4 @@
 Book Parser
-==============
-This program parse any book on parts like a Text, Paragraph, Sentence, Word and ect.
-After that the program assembles them back to single book.
+===========
+This program parse a text book on its parts like a paragraphs, sentences, words and ect.
+After that the program assembles them back to one book.

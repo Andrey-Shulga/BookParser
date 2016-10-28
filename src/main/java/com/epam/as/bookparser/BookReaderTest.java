@@ -1,27 +1,35 @@
 package com.epam.as.bookparser;
 
-import com.epam.as.bookparser.Parser.TextParser;
+import com.epam.as.bookparser.model.Text;
+import com.epam.as.bookparser.parser.TextParser;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 /**
- * This program parse text on its parts.
+ * This program parse a text on its parts.
+ * Return texts parts in one text container
  *
  * @author Andrey Shulga
- * @version 1.0 2016-10-27
+ * @version 1.0 2016-10-29
  */
 public class BookReaderTest {
     public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
         String bookFileName = "book.txt";
+        String bookCopyFileName = "bookCopy.txt";
 
+        //Create and configure parser
         TextParser parser = new TextParser();
         parser.configure();
 
+        //Parse text from file on its parts and return back in one text container
         InputStream in = new FileInputStream(bookFileName);
-        parser.parse(in);
+        Text text = parser.parse(in);
+
+        //Write text container to file
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(bookCopyFileName))) {
+            out.write(text.toSourceString());
+        }
 
     }
 }

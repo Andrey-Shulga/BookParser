@@ -1,7 +1,7 @@
-package com.epam.as.bookparser.Parser;
+package com.epam.as.bookparser.parser;
 
-import com.epam.as.bookparser.Text;
-import com.epam.as.bookparser.TextComposite;
+import com.epam.as.bookparser.model.Text;
+import com.epam.as.bookparser.model.TextComposite;
 
 import java.io.IOException;
 import java.io.InputStream;

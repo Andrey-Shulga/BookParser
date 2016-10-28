@@ -1,4 +1,4 @@
-package com.epam.as.bookparser;
+package com.epam.as.bookparser.model;
 
 import java.util.Iterator;
 
@@ -7,10 +7,6 @@ import java.util.Iterator;
  */
 public class SentencePart extends AbstractTextComposite<Word> {
 
-    @Override
-    public String toSourceString() {
-        return null;
-    }
 
     @Override
     public Iterator<TextComponent> iterator() {
