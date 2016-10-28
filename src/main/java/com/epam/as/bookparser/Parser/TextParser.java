@@ -5,6 +5,7 @@ import com.epam.as.bookparser.Text;
 import com.epam.as.bookparser.TextComposite;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.util.*;
@@ -47,10 +48,9 @@ public class TextParser implements Parser {
     }
 
     @Override
-    public Text parse(InputStream in) throws IllegalAccessException, InstantiationException {
+    public Text parse(InputStream in) throws IllegalAccessException, InstantiationException, IOException {
         Scanner scanner = new Scanner(in).useDelimiter("\\Z");
         String source = scanner.next();
-
         return parse(source);
     }
 

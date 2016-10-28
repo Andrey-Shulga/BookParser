@@ -4,6 +4,7 @@ import com.epam.as.bookparser.Text;
 import com.epam.as.bookparser.TextComposite;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 
@@ -15,7 +16,7 @@ public interface Parser {
 
     Text parse(File file);
 
-    Text parse(InputStream in) throws IllegalAccessException, InstantiationException;
+    Text parse(InputStream in) throws IllegalAccessException, InstantiationException, IOException;
 
     Text parse(Reader reader);
 
