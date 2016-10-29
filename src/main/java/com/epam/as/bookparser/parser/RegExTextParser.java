@@ -1,5 +1,6 @@
 package com.epam.as.bookparser.parser;
 
+import com.epam.as.bookparser.exception.ParserException;
 import com.epam.as.bookparser.model.Symbol;
 import com.epam.as.bookparser.model.Text;
 import com.epam.as.bookparser.model.TextComponent;
@@ -18,6 +19,7 @@ import java.util.regex.Pattern;
  * Parse text on its components.
  */
 public class RegExTextParser implements Parser {
+
 
     private static final String PROPERTY_PARSER_FILE_NAME = "parser.properties";
     private static final String PROPERTY_TEXT_PARTS_FILE_NAME = "textparts.properties";
@@ -45,7 +47,7 @@ public class RegExTextParser implements Parser {
     }
 
     @Override
-    public Text parse(InputStream in) throws IllegalAccessException, InstantiationException, IOException {
+    public Text parse(InputStream in) throws IOException, ParserException {
 
         Scanner scanner = new Scanner(in).useDelimiter("\\Z");
         String source = scanner.next();
@@ -54,19 +56,20 @@ public class RegExTextParser implements Parser {
 
 
     @Override
-    public <T extends TextComposite> T parseTo(String source, Class<T> compositeClass) {
+    public <T extends TextComposite> T parseTo(String source, Class<T> compositeClass) throws ParserException {
 
         TextComposite composite = null;
         try {
             composite = compositeClass.newInstance();
+
         } catch (InstantiationException | IllegalAccessException e) {
-            //TODO ParserExeption
+            throw new ParserException("Program was interrupted, because composite object couldn't be create by newInstance() method:", e);
         }
         Class<? extends TextComponent> componentClass = componentClasses.get(compositeClass);
         if (componentClass == Symbol.class) {
             for (int i = 0; i < source.length(); i++) {
                 char c = source.charAt(i);
-                Symbol symbol = new Symbol(c);
+                Symbol symbol = Symbol.of(c);
                 composite.add(symbol);
             }
         } else {
@@ -76,14 +79,18 @@ public class RegExTextParser implements Parser {
             while (matcher.find()) {
                 String part = matcher.group();
                 if (part.length() == 1) {
-                    Symbol symbol = new Symbol(part.charAt(0));
+                    char c = part.charAt(0);
+                    Symbol symbol = Symbol.of(c);
                     composite.add(symbol);
                 } else {
                     TextComponent textComponent = parseTo(part, (Class<T>) componentClass);
                     composite.add(textComponent);
+
                 }
             }
         }
+
         return (T) composite;
+
     }
 }

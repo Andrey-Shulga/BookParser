@@ -1,5 +1,6 @@
 package com.epam.as.bookparser;
 
+import com.epam.as.bookparser.exception.ParserException;
 import com.epam.as.bookparser.model.Text;
 import com.epam.as.bookparser.parser.RegExTextParser;
 
@@ -13,7 +14,7 @@ import java.io.*;
  * @version 1.0 2016-10-29
  */
 public class BookReaderTest {
-    public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, ParserException {
 
         String bookFileName = "book.txt";
         String bookCopyFileName = "bookCopy.txt";
