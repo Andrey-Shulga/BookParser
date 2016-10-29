@@ -4,7 +4,6 @@ import com.epam.as.bookparser.exception.ParserException;
 import com.epam.as.bookparser.model.Text;
 import com.epam.as.bookparser.model.TextComposite;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -12,7 +11,7 @@ import java.io.InputStream;
  */
 interface Parser {
 
-    Text parse(InputStream in) throws IOException, ParserException;
+    Text parse(InputStream in) throws ParserException;
 
     <T extends TextComposite> T parseTo(String source, Class<T> compositeClass) throws ParserException;
 }
