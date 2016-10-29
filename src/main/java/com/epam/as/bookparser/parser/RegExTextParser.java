@@ -80,6 +80,7 @@ public class RegExTextParser implements Parser {
             throw new ParserException("Program was interrupted, because composite object couldn't be create by newInstance() method:", e);
         }
         Class<? extends TextComponent> componentClass = componentClasses.get(compositeClass);
+        logger.debug(MessageFormat.format("Parse source text:\n {0} \n FROM {1} TO {2} \n", source, composite, componentClass));
         if (componentClass == Symbol.class) {
             for (int i = 0; i < source.length(); i++) {
                 char c = source.charAt(i);
