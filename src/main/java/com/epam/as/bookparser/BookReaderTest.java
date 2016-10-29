@@ -1,7 +1,7 @@
 package com.epam.as.bookparser;
 
 import com.epam.as.bookparser.model.Text;
-import com.epam.as.bookparser.parser.TextParser;
+import com.epam.as.bookparser.parser.RegExTextParser;
 
 import java.io.*;
 
@@ -19,7 +19,7 @@ public class BookReaderTest {
         String bookCopyFileName = "bookCopy.txt";
 
         //Create and configure parser
-        TextParser parser = new TextParser();
+        RegExTextParser parser = new RegExTextParser();
         parser.configure();
 
         //Parse text from file on its parts and return back in one text container
