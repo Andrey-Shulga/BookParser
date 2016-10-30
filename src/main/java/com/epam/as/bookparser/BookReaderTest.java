@@ -20,9 +20,7 @@ public class BookReaderTest {
     public static void main(String[] args) throws ParserException {
 
         Logger logger = LoggerFactory.getLogger("BookReaderTest");
-        logger.info("111");
-        logger.error("11122222");
-        logger.debug("333333");
+
         String bookFileName = "book.txt";
         String bookCopyFileName = "bookCopy.txt";
         Text text = null;
