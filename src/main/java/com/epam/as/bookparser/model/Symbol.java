@@ -26,4 +26,9 @@ public class Symbol implements TextLeaf<TextComponent> {
     public void toSourceString(StringBuilder builder) {
         builder.append(ch);
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(ch);
+    }
 }

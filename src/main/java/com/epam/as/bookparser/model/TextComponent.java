@@ -5,4 +5,6 @@ package com.epam.as.bookparser.model;
  */
 public interface TextComponent {
     void toSourceString(StringBuilder builder);
+
+
 }

@@ -8,13 +8,14 @@ import java.util.List;
  */
 abstract class AbstractTextComposite<E extends TextComponent> implements TextComposite<E> {
 
-    private List<E> components = new ArrayList<>();
+    List<E> components = new ArrayList<>();
 
 
     @Override
     public void add(E component) {
         components.add(component);
     }
+
 
     public void toSourceString(StringBuilder builder) {
         for (E component : components)
@@ -25,5 +26,10 @@ abstract class AbstractTextComposite<E extends TextComponent> implements TextCom
         StringBuilder builder = new StringBuilder();
         toSourceString(builder);
         return builder.toString();
+    }
+
+    @Override
+    public String toString() {
+        return toSourceString();
     }
 }

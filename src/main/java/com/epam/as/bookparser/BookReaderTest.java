@@ -2,6 +2,7 @@ package com.epam.as.bookparser;
 
 import com.epam.as.bookparser.exception.ParserException;
 import com.epam.as.bookparser.model.Text;
+import com.epam.as.bookparser.model.TextComponentIterator;
 import com.epam.as.bookparser.parser.RegExTextParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +43,11 @@ public class BookReaderTest {
         } catch (IOException e) {
             logger.error(MessageFormat.format("Can''t write to file: \"{0}\" ", bookCopyFileName), e);
         }
+
+        //Create iterator for text container
+        TextComponentIterator iterator = new TextComponentIterator(text);
+        while (iterator.hasNext())
+            System.out.println(iterator.next());
 
     }
 }
