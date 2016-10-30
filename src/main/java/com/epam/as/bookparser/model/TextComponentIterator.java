@@ -3,7 +3,6 @@ package com.epam.as.bookparser.model;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.NoSuchElementException;
 
 /**
  * Iterator for text container.
@@ -22,16 +21,13 @@ public class TextComponentIterator implements Iterator<TextComponent> {
 
     @Override
     public TextComponent next() {
-        if (stack.isEmpty()) {
-            throw new NoSuchElementException();
-        }
 
         TextComponent node = stack.pop();
         if (node != null) {
             if (node instanceof AbstractTextComposite) {
-                AbstractTextComposite ac = (AbstractTextComposite) node;
-                for (Object acc : ac.components)
-                    stack.add((TextComponent) acc);
+                AbstractTextComposite tc = (AbstractTextComposite) node;
+                for (Object o : tc.components)
+                    stack.add((TextComponent) o);
             }
         }
         return node;

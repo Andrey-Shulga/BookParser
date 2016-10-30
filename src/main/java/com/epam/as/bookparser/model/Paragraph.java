@@ -5,6 +5,4 @@ package com.epam.as.bookparser.model;
  */
 public class Paragraph extends AbstractTextComposite<Sentence> {
 
-
-
 }

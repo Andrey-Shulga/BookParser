@@ -5,5 +5,4 @@ package com.epam.as.bookparser.model;
  */
 public class SentencePart extends AbstractTextComposite<Word> {
 
-
 }

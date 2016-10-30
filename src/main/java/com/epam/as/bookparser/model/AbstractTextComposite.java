@@ -10,7 +10,6 @@ abstract class AbstractTextComposite<E extends TextComponent> implements TextCom
 
     List<E> components = new ArrayList<>();
 
-
     @Override
     public void add(E component) {
         components.add(component);

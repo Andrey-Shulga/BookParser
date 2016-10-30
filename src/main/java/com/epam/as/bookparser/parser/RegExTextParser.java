@@ -18,7 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Parse text on its components.
+ * Parse text on its components using regular expression.
  */
 public class RegExTextParser implements Parser {
 

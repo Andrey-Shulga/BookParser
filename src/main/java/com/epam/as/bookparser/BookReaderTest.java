@@ -11,7 +11,7 @@ import java.io.*;
 import java.text.MessageFormat;
 
 /**
- * This program parse a text on its parts.
+ * This program parse a text on its parts with using regular expression.
  * Return texts parts in one text container
  *
  * @author Andrey Shulga
