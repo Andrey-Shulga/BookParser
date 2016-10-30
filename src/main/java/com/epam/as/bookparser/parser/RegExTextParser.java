@@ -101,6 +101,7 @@ public class RegExTextParser implements Parser {
                 String part = matcher.group();
                 if (part.length() == 1) {
                     char c = part.charAt(0);
+                    logger.debug(MessageFormat.format("Parse source text:\n \"{0}\" \n FROM {1}\n TO {2} \n", part, composite, componentClass));
                     Symbol symbol = Symbol.of(c);
                     composite.add(symbol);
                 } else {
