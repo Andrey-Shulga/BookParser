@@ -2,8 +2,10 @@ package com.epam.as.bookparser;
 
 import com.epam.as.bookparser.exception.ParserException;
 import com.epam.as.bookparser.model.Text;
+import com.epam.as.bookparser.model.TextComponent;
 import com.epam.as.bookparser.model.TextComponentIterator;
 import com.epam.as.bookparser.parser.RegExTextParser;
+import com.epam.as.bookparser.service.TextService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,8 +48,12 @@ public class BookReaderTest {
 
         //Create iterator for text container
         TextComponentIterator iterator = new TextComponentIterator(text);
-        while (iterator.hasNext())
-            System.out.println(iterator.next());
+        while (iterator.hasNext()) {
+            TextComponent tc = iterator.next();
+            System.out.println(tc);
+        }
+
+        TextService textService = new TextService(text);
 
     }
 }

@@ -8,7 +8,7 @@ import java.util.LinkedList;
  * Iterator for text container.
  */
 public class TextComponentIterator implements Iterator<TextComponent> {
-    Deque<TextComponent> stack = new LinkedList<>();
+    private Deque<TextComponent> stack = new LinkedList<>();
 
     public TextComponentIterator(TextComponent root) {
         stack.add(root);
@@ -16,6 +16,7 @@ public class TextComponentIterator implements Iterator<TextComponent> {
 
     @Override
     public boolean hasNext() {
+
         return !stack.isEmpty();
     }
 
