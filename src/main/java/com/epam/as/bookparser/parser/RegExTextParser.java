@@ -69,6 +69,11 @@ public class RegExTextParser implements Parser {
         return parseTo(source, Text.class);
     }
 
+    @Override
+    public Text parse(String source) throws ParserException {
+        return parseTo(source, Text.class);
+    }
+
 
     @Override
     public <T extends TextComposite> T parseTo(String source, Class<T> compositeClass) throws ParserException {
