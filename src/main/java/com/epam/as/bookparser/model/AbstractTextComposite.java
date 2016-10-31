@@ -31,4 +31,8 @@ abstract class AbstractTextComposite<E extends TextComponent> implements TextCom
     public String toString() {
         return toSourceString();
     }
+
+    public List<E> getComponents() {
+        return components;
+    }
 }

@@ -2,15 +2,12 @@ package com.epam.as.bookparser;
 
 import com.epam.as.bookparser.exception.ParserException;
 import com.epam.as.bookparser.model.Text;
-import com.epam.as.bookparser.model.TextComponent;
-import com.epam.as.bookparser.model.TextComponentIterator;
 import com.epam.as.bookparser.parser.RegExTextParser;
 import com.epam.as.bookparser.service.TextService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.text.MessageFormat;
 
 /**
  * This program parse a text on its parts with using regular expression.
@@ -22,7 +19,7 @@ import java.text.MessageFormat;
 public class BookReaderTest {
     public static void main(String[] args) throws ParserException {
 
-        Logger logger = LoggerFactory.getLogger("BookReaderTest");
+        Logger errorLogger = LoggerFactory.getLogger("errorLogger");
 
         String bookFileName = "book.txt";
         String bookCopyFileName = "bookCopy.txt";
@@ -36,24 +33,20 @@ public class BookReaderTest {
         try (InputStream in = new FileInputStream(bookFileName)) {
             text = parser.parse(in);
         } catch (IOException e) {
-            logger.error(MessageFormat.format("File \"{0}\" not found!", bookFileName), e);
+            errorLogger.error("File \"{}\" not found!", bookFileName, e);
         }
 
         //Write text container to file
         try (BufferedWriter out = new BufferedWriter(new FileWriter(bookCopyFileName))) {
             if (text != null) out.write(text.toSourceString());
         } catch (IOException e) {
-            logger.error(MessageFormat.format("Can''t write to file: \"{0}\" ", bookCopyFileName), e);
-        }
-
-        //Create iterator for text container
-        TextComponentIterator iterator = new TextComponentIterator(text);
-        while (iterator.hasNext()) {
-            TextComponent tc = iterator.next();
-            System.out.println(tc);
+            errorLogger.error("Can''t write to file: \"{}\" ", bookCopyFileName, e);
         }
 
         TextService textService = new TextService(text);
+
+        //Output all sentences of this text in ascending order of the number of their words.
+        textService.performTextTask2();
 
     }
 }

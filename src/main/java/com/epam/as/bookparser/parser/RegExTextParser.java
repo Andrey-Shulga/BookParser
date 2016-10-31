@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
-import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -22,7 +21,8 @@ import java.util.regex.Pattern;
  */
 public class RegExTextParser implements Parser {
 
-    private Logger logger = LoggerFactory.getLogger("RegExTextParser");
+    private Logger debugLogger = LoggerFactory.getLogger("debugLogger");
+    private Logger errorLogger = LoggerFactory.getLogger("errorLogger");
     private static final String PROPERTY_PARSER_FILE_NAME = "parser.properties";
     private static final String PROPERTY_TEXT_PARTS_FILE_NAME = "textparts.properties";
     private Map<Class, String> regExes = new HashMap<>();
@@ -39,10 +39,11 @@ public class RegExTextParser implements Parser {
             try {
                 aClass = Class.forName((String) m.getKey());
             } catch (ClassNotFoundException e) {
-                logger.error(MessageFormat.format("Class \"{0}\" from property file \"{1}\" not found!", m.getKey(), PROPERTY_PARSER_FILE_NAME), e);
+                errorLogger.error("Class \"{}\" from property file \"{}\" not found!", m.getKey(), PROPERTY_PARSER_FILE_NAME, e);
             }
             String regEx = (String) m.getValue();
             regExes.put(aClass, regEx);
+
         }
 
         for (Map.Entry m : pManagerTextParts.getProperties().entrySet()) {
@@ -52,7 +53,7 @@ public class RegExTextParser implements Parser {
                 aClass = Class.forName((String) m.getKey());
                 bClass = Class.forName((String) m.getValue());
             } catch (ClassNotFoundException e) {
-                logger.error(MessageFormat.format("Class \"{0}\" or \"{1}\" from property file \"{2}\" not found!", m.getKey(), m.getValue(), PROPERTY_TEXT_PARTS_FILE_NAME), e);
+                errorLogger.error("Class \"{}\" or \"{}\" from property file \"{}\" not found!", m.getKey(), m.getValue(), PROPERTY_TEXT_PARTS_FILE_NAME, e);
             }
             componentClasses.put(aClass, bClass);
         }
@@ -77,18 +78,18 @@ public class RegExTextParser implements Parser {
             composite = compositeClass.newInstance();
 
         } catch (InstantiationException | IllegalAccessException e) {
-            throw new ParserException("Program was interrupted, because composite object couldn't be create by newInstance() method:", e);
+            throw new ParserException(e);
         }
         Class<? extends TextComponent> componentClass = componentClasses.get(compositeClass);
 
-        logger.debug(MessageFormat.format("Parse source text:\n {0} \n FROM {1}\n TO {2} \n", source, composite, componentClass));
+        debugLogger.debug("Parse source text: \n {} \n FROM --> {} \n TO --> {} \n", source, compositeClass, componentClass);
 
         if (componentClass == Symbol.class) {
 
             for (int i = 0; i < source.length(); i++) {
                 char c = source.charAt(i);
 
-                logger.debug(MessageFormat.format("Parse source word:\n {0} \n on symbol \"{1}\"\n", source, c));
+                debugLogger.debug("Parse source word:\n \"{}\" \n on symbol: \"{}\"\n", source, c);
 
                 Symbol symbol = Symbol.of(c);
                 composite.add(symbol);
@@ -101,7 +102,9 @@ public class RegExTextParser implements Parser {
                 String part = matcher.group();
                 if (part.length() == 1) {
                     char c = part.charAt(0);
-                    logger.debug(MessageFormat.format("Parse source text:\n \"{0}\" \n FROM {1}\n TO {2} \n", part, composite, componentClass));
+
+                    debugLogger.debug("Parse source text: \n \"{}\" \n FROM --> {} \n TO --> {}\n", part, compositeClass, componentClass);
+
                     Symbol symbol = Symbol.of(c);
                     composite.add(symbol);
                 } else {
